@@ -5,7 +5,7 @@ import datetime
 
 DATABASE = SqliteDatabase('employees.sqlite')
 
-https: // docs.peewee-orm.com/en/latest/peewee/models.html  # field-types-table
+# https: // docs.peewee-orm.com/en/latest/peewee/models.html  # field-types-table
 
 
 class Employee(Model):
@@ -20,6 +20,6 @@ class Employee(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Employee], safe=True)
-    print("TABLES Created")
+    DATABASE.create_tables([Employee], safe=True) # safe true will create the table only if they are not existed
+    print("Connected to the DB and created tables if they don't already exist")
     DATABASE.close()

@@ -12,7 +12,7 @@ https://pypi.org/project/peewee/
 -pip3 install peewee
 -pip3 freeze > requirements.txt
 https://pypi.org/project/psycopg2/
--pip3 install psycopg2
+-pip3 install psycopg2 or  pip3 install psycopg2-binary // lets application connect to a DATABASE 
 -pip3 freeze > requirements.txt
 -touch app.py
 https://flask.palletsprojects.com/en/2.2.x/quickstart/
@@ -21,3 +21,6 @@ https://docs.peewee-orm.com/en/latest/peewee/quickstart.html#model-definition
 https://docs.peewee-orm.com/en/latest/peewee/models.html#field-types-table
 -mkdir resources 
 -touch resources/employees.py
+ https://flask.palletsprojects.com/en/2.2.x/tutorial/views/
+ https://flask.palletsprojects.com/en/2.2.x/blueprints/
+ we will use Blueprints to create basically a "controller"
