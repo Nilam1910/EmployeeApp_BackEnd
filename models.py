@@ -20,6 +20,7 @@ class Employee(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Employee], safe=True) # safe true will create the table only if they are not existed
+    # safe true will create the table only if they are not existed
+    DATABASE.create_tables([Employee], safe=True)
     print("Connected to the DB and created tables if they don't already exist")
     DATABASE.close()

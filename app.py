@@ -30,13 +30,9 @@ def after_request(response):
 CORS(employees, origins=['http://localhost:3000'], supports_credentials=True)
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 
-app.register_blueprint(employees, url_prefix='/api/v1/dogs')
+app.register_blueprint(employees, url_prefix='/api/v1/employees')
 # sets up the directions for handling the routes for the api(employee)
 # The default URL ends in / ("my-website.com/").
-
-
-
-
 
 
 # Run the app when the program starts!
