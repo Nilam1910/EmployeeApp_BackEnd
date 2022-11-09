@@ -66,6 +66,26 @@ def get_one_employee(id):
         status=200
     ), 200
 
+# UPDATE ROUTE(edit_route or View_route)
+
+
+@employees.route('/<id>', methods=['PUT'])
+def update_employee(id):
+    # what ever we get from this we wants to assign to employee
+    payload = request.get_json()
+    # so we need to located the model before we need to do anything with it
+    # (**payload)it a spread operator for all of this  name=payload['name'], admin=payload['admin'], department=payload['department']) # (in javascript is ...)
+    query = models.Employee.update(**payload).where(models.Employee.id == id)
+    # https://docs.peewee-orm.com/en/latest/peewee/querying.html
+    query.execute()
+    # row = query.execute()
+    # print(row) to see row been updated
+    return jsonify(
+        data=model_to_dict(models.Employee.get_by_id(id)),
+        status=200,
+        message='resource updated successfully 🎉'
+    ), 200
+
 
 # To check all Employee crated
 
