@@ -12,7 +12,7 @@ employees = Blueprint('employees', 'employees')
 # https://www.tutorialspoint.com/flask/flask_request_object.htm
 # BluePrints - The basic concept of blueprints is that they record operations to execute when registered on an application.# INDEX ROUTE ["GET"]
 
-# INDEX ROUTE
+# INDEX ROUTE, methods=['GET']
 
 
 # @employees.route('/') # by default this is a get route but can specify in following
@@ -34,7 +34,7 @@ def employees_index():
     }), 200
 
 
-# # CREATE ROUTE
+# # CREATE ROUTE, methods=["POST"]
 
 
 @employees.route('/', methods=["POST"])  # worked
@@ -53,7 +53,7 @@ def create_employees():
     return jsonify(data=employee_dict, message='Successfully created employee!!! 🎉', status=201), 201
 
 
-# SHOW ROUTE
+# SHOW ROUTE, '<id>', methods=['GET']
 
 
 @employees.route('<id>', methods=['GET'])
@@ -66,10 +66,10 @@ def get_one_employee(id):
         status=200
     ), 200
 
-# UPDATE ROUTE(edit_route or View_route)
+# UPDATE ROUTE, '/<id>', methods=['PUT'] ### (edit_route or View_route)
 
 
-@employees.route('/<id>', methods=['PUT'])
+@employees.route('/<id>', methods=['PUT'])  # worked
 def update_employee(id):
     # what ever we get from this we wants to assign to employee
     payload = request.get_json()
@@ -86,7 +86,18 @@ def update_employee(id):
         message='resource updated successfully 🎉'
     ), 200
 
+# DELETE,  '/<id>',methods=['DELETE']
 
+
+@employees.route('/<id>', methods=['DELETE'])
+def delete_employee(id):
+    query = models.Employee.delete().where(models.Employee.id == id)
+    query.execute()
+    return jsonify(
+        data='resource successfully deleted',
+        status=200,
+        message='resource successfully deleted'
+    ), 200
 # To check all Employee crated
 
 
