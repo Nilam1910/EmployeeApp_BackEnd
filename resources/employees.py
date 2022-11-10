@@ -89,12 +89,12 @@ def update_employee(id):
 # DELETE,  '/<id>',methods=['DELETE']
 
 
-@employees.route('/<id>', methods=['DELETE'])
+@employees.route('/<id>', methods=['DELETE'])  # worked
 def delete_employee(id):
     query = models.Employee.delete().where(models.Employee.id == id)
     query.execute()
     return jsonify(
-        data='resource successfully deleted',
+        data=model_to_dict(models.Employee.get_by_id(id)),
         status=200,
         message='resource successfully deleted'
     ), 200

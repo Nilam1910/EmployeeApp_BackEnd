@@ -4,6 +4,7 @@ from peewee import *
 import datetime
 
 DATABASE = SqliteDatabase('employees.sqlite')
+# DATABASE = connect(os.environ.get('DATABASE_URL') or 'sqlite:///employees.sqlite')
 
 # https: // docs.peewee-orm.com/en/latest/peewee/models.html  # field-types-table
 
