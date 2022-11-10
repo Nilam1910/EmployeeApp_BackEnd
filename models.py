@@ -2,9 +2,19 @@
 
 from peewee import *
 import datetime
-
-DATABASE = SqliteDatabase('employees.sqlite')
-# DATABASE = connect(os.environ.get('DATABASE_URL') or 'sqlite:///employees.sqlite')
+import os
+from playhouse.db_url import connect
+# DATABASE = SqliteDatabase('employees.sqlite')
+# DATABASE = connect(os.environ.get('DATABASE_URL')
+#                    or 'sqlite:///employees.sqlite')
+if 'ON_HEROKU' in os.environ:  # later we will manually add this env var
+    # in heroku so we can write this code
+    DATABASE = connect(os.environ.get('DATABASE_URL'))  # heroku will add this
+    # env var for you
+    # when you provision the
+    # Heroku Postgres Add-on
+else:
+    DATABASE = SqliteDatabase('dogs.sqlite')
 
 # https: // docs.peewee-orm.com/en/latest/peewee/models.html  # field-types-table
 
