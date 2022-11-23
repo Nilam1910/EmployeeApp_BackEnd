@@ -100,7 +100,7 @@ def delete_employee(id):
     query = models.Employee.delete().where(models.Employee.id == id)
     query.execute()
     return jsonify(
-        data=model_to_dict(models.Employee.get_by_id(id)),
+        data='resource successfully deleted',
         status=200,
         message='resource successfully deleted'
     ), 200
