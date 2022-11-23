@@ -12,7 +12,7 @@ employees = Blueprint('employees', 'employees')
 # https://www.tutorialspoint.com/flask/flask_request_object.htm
 # BluePrints - The basic concept of blueprints is that they record operations to execute when registered on an application.# INDEX ROUTE ["GET"]
 
-# INDEX ROUTE, methods=['GET']
+# INDEX ROUTE, methods=['GET'] # 1
 
 
 # @employees.route('/') # by default this is a get route but can specify in following
@@ -34,7 +34,7 @@ def employees_index():
     }), 200
 
 
-# # CREATE ROUTE, methods=["POST"]
+# # CREATE ROUTE, methods=["POST"] # 2
 
 
 @employees.route('/', methods=["POST"])  # worked
@@ -45,6 +45,7 @@ def create_employees():
     # print(type(payload), 'payload')
     # employee = models.Employee.create(**payload)
     new_employee = models.Employee.create(
+
         name=payload['name'], admin=payload['admin'], department=payload['department'])  # need this one frontend
     print(dir(new_employee))
     # --------------------------------------------------for frontend
@@ -53,11 +54,12 @@ def create_employees():
     return jsonify(data=employee_dict, message='Successfully created employee!!! 🎉', status=201), 201
 
 
-# SHOW ROUTE, '<id>', methods=['GET']
+# SHOW ROUTE, '<id>', methods=['GET'] # 3
 
 
 @employees.route('<id>', methods=['GET'])
 def get_one_employee(id):
+
     employee = models.Employee.get_by_id(id)
     print(employee)
     return jsonify(
@@ -68,11 +70,15 @@ def get_one_employee(id):
 
 # UPDATE ROUTE, '/<id>', methods=['PUT'] ### (edit_route or View_route)
 
+# **payload line
 
-@employees.route('/<id>', methods=['PUT'])  # worked
+
+@employees.route('/<id>', methods=["PUT"])  # 4 # worked
 def update_employee(id):
+    print("in the update route")
     # what ever we get from this we wants to assign to employee
     payload = request.get_json()
+    print("this is payload print", payload)
     # so we need to located the model before we need to do anything with it
     # (**payload)it a spread operator for all of this  name=payload['name'], admin=payload['admin'], department=payload['department']) # (in javascript is ...)
     query = models.Employee.update(**payload).where(models.Employee.id == id)
@@ -89,7 +95,7 @@ def update_employee(id):
 # DELETE,  '/<id>',methods=['DELETE']
 
 
-@employees.route('/<id>', methods=['DELETE'])  # worked
+@employees.route('/<id>', methods=['DELETE'])  # 5 # worked
 def delete_employee(id):
     query = models.Employee.delete().where(models.Employee.id == id)
     query.execute()

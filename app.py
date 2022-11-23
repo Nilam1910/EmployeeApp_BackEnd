@@ -14,12 +14,9 @@ PORT = 8000
 app = Flask(__name__)
 
 
-CORS(employees, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(employees, origins=['http://localhost:3000',
+     'https://employees-react-demo.demo.herokuapp.com'], supports_credentials=True)  # authentication we need this supports_credentials
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-
-app.register_blueprint(employees, url_prefix='/api/v1/employees')
-# sets up the directions for handling the routes for the api(employee)
-# The default URL ends in / ("my-website.com/").
 
 
 @app.before_request
@@ -38,6 +35,10 @@ def after_request(response):
     g.db.close()
     return response
 
+
+app.register_blueprint(employees, url_prefix='/api/v1/employees')
+# sets up the directions for handling the routes for the api(employee)
+# The default URL ends in / ("my-website.com/").
 
 if os.environ.get('FLASK_ENV') != 'development':
     print('/non heroku')
