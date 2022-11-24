@@ -7,7 +7,7 @@ from resources.employees import employees
 import os
 # from playhouse.db_url import connect
 DEBUG = True
-PORT = 8000
+PORT = os.environ.get('PORT')
 
 # Initialize an instance of the Flask class.
 # This starts the website!
